@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load cart %}
+{% load custom_filter %}
+<div class="border rounded p-4 m-4">
+    <h1 class="m-3 text-center">YOUR ORDERS</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center">Sno</th>
+            <th class="text-center">Product</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Order Date</th>
+            <th class="text-center">Arrival Date</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Total</th>
+            <th class="text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+          <tr>
+            <th class="text-center">{{forloop.counter}}</th>
+            <td class="text-center"><img style="height: 80px;"  src="{{order.Product.Image.url}}" alt=""></td>
+            <td class="text-center">{{order.Product.Name}}</td>
+            <td class="text-center">{{order.Order_Date}}</td>
+            <td class="text-center">{{order.Arrival_Date}}</td>
+            <td class="text-center">{{order.Price|currency}}</td>
+            <td class="text-center">{{order.Quantity}}</td>
+            <td class="text-center">{{order.Quantity|multiply:order.Price|currency}}</td>
+            {% if order.Status %}
+            <td class="text-center"><span class="badge bg-success">Completed</span></td>
+            {% else %}
+            <td class="text-center"><span class="badge bg-warning">Pending</span></td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+{% endblock %}

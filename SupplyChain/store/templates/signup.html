@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-5 mx-auto border rounded p-4">
+            <h3 class="alert alert-light border rouned">Create Account</h3>
+            <form action="/signup" method="POST">
+                {% csrf_token %}
+
+                {% if msg %}
+                    <div class="alert alert-danger" role="alert">
+                        {{msg}}
+                    </div>
+                {% endif %}
+
+                {% if errors.error1 %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{errors.error1}}
+                    </div>
+                {% endif%}
+                   <!--first name-->
+                <div class="form-group mt-2">
+                    <label for="">First Name</label>
+                    {% if errors.error1 %}
+                    <input type="text" value="" name="firstname" id="" class="form-control form-control-sm" >
+                    {% else %}
+                    <input type="text" value="{{data.first_name}}" name="firstname" id="" class="form-control form-control-sm" >
+                    {% endif %}
+                </div>
+
+                {% if errors.error2 %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{errors.error2}}
+                    </div>
+                {% endif%}
+                   <!--last name-->
+                <div class="form-group mt-2">
+                    <label for="">Last Name</label>
+                    {% if errors.error2 %}
+                    <input type="text" value="" name="lastname" id="" class="form-control form-control-sm" placeholder="">
+                    {% else %}
+                    <input type="text" value="{{data.last_name}}" name="lastname" id="" class="form-control form-control-sm" placeholder="">
+                    {% endif %}
+                </div>
+                {% if errors.error3 %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{errors.error3}}
+                    </div>
+                {% endif%}
+                <!--email-->
+                <div class="form-group mt-2">
+                    <label for="">Email</label>
+                    {% if errors.error3 %}
+                    <input type="email" value="" name="email" id="" class="form-control form-control-sm" placeholder="Example@gmail.com" >
+                    {% else %}
+                    <input type="email" value="{{data.email}}" name="email" id="" class="form-control form-control-sm" placeholder="Example@gmail.com" >
+                    {% endif %}
+                </div>
+
+                {% if errors.error4 %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{errors.error4}}
+                    </div>
+                {% endif%}
+                 <!--passsword-->
+                <div class="form-group mt-2">
+                    <label for="">Password</label>
+                    <input type="password" name="password" id="" class="form-control form-control-sm">
+                </div>
+
+
+                <!--button-->
+                <div class="form-group mt-2">
+                    <input class="btn btn-sm btn-success" type="submit" value="Create Account">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
